@@ -104,7 +104,13 @@ median_d&lt;-median(steps_byDate$total, na.rm=TRUE)</code></pre>
 <p>First, find the total number of missing values</p>
 <pre class="r"><code>total_na&lt;-sum(!complete.cases(data))</code></pre>
 <p>There are <strong>2304</strong> missing values</p>
-<p>Next, merge data with average from interval to fill in the missing values</p>
+<p>To impute the missing data I do the following</p>
+<ol style="list-style-type: decimal">
+<li>Get the list of all NA values</li>
+<li>Merge the data with interval average</li>
+<li>For all NA values, set the steps as interval averages</li>
+<li>Remove the avg col (as this is an extra)</li>
+</ol>
 <pre class="r"><code>nas&lt;-is.na(data$steps)
 impute_data&lt;-merge(data, steps_byInterval, by=&quot;interval&quot;)
 impute_data&lt;-impute_data[with(impute_data, order(impute_data$date, impute_data$steps)), ]

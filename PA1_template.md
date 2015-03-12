@@ -79,7 +79,13 @@ total_na<-sum(!complete.cases(data))
 ```
 There are **2304** missing values
 
-Next, merge data with average from interval to fill in the missing values
+To impute the missing data I do the following
+
+ 1. Get the list of all NA values 
+ 2. Merge the data with interval average 
+ 3. For all NA values, set the steps as interval averages 
+ 4. Remove the avg col (as this is an extra) 
+
 
 ```r
 nas<-is.na(data$steps)
